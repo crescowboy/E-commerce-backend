@@ -1,7 +1,14 @@
+##Para recuperar todos los productos
 GET http://localhost:5000/products
+###Para recuperar un producto por el id
+
+GET http://localhost:5000/products/2
+
+###Para recuperar por tipo
+GET http://localhost:5000/products?type=camiseta
 
 ###Para crear un producto
-POST http://localhost:5000/products
+POST http://localhost:5000/newproducts
 Content-Type: application/json
 
 {
