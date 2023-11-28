@@ -1,6 +1,7 @@
 const express = require('express')
 const crypto = require('node:crypto')
-const products = require('./json/products.json')
+const products = require('./json/products.json');
+const { validateProduct } = require('./schemas/products');
 
 const app = express();
 app.disable('x-powered-by')
@@ -30,23 +31,17 @@ app.get('/products/:id', (req, res)=>{
 })
 
 app.post('/products', (req, res)=>{
-    console.log('Recibida una solicitud POST a /products');
-    const {
-        name, 
-        description,
-        price, 
-        imageUrl,
-        rate,
-        type
-    } = req.body;
+    const result = validateProduct(req.body) 
+
+    if(result.error){
+        return res.status(400).json({message: result.error.message})
+    }
+
+    
 
     const newProduct = {
         id: crypto.randomUUID(),
-        name, 
-        description,
-        price, 
-        imageUrl,
-        type
+        ...result.data
     }
 
     console.log(newProduct)
