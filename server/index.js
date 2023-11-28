@@ -1,4 +1,5 @@
 const express = require('express')
+const crypto = require('node:crypto')
 const products = require('./json/products.json')
 
 const app = express();
@@ -23,6 +24,31 @@ app.get('/products/:id', (req, res)=>{
     if(product) return res.json(product)
 
     res.status(404).json({message: "No se encontro el producto"})
+})
+
+app.post('/products', (req, res)=>{
+    console.log('Recibida una solicitud POST a /products');
+    const {
+        name, 
+        description,
+        price, 
+        imageUrl,
+        rate,
+        type
+    } = req.body;
+
+    const newProduct = {
+        id: crypto.randomUUID(),
+        name, 
+        description,
+        price, 
+        imageUrl,
+        rate: rate?? 0,
+        type
+    }
+
+    products.push(newProduct)
+    res.status(201).json(newProduct)
 })
 
 app.post('/newproducts', (req, res)=>{

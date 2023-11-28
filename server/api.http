@@ -8,13 +8,16 @@ GET http://localhost:5000/products/2
 GET http://localhost:5000/products?type=camiseta
 
 ###Para crear un producto
-POST http://localhost:5000/newproducts
+POST http://localhost:5000/products
 Content-Type: application/json
 
 {
-        "id": 3,
-        "name": "Producto 3",
+        "id":,
+        "name": "Producto 3333",
         "description": "Descripción del Producto 3",
         "price": 24.99,
-        "imageUrl": "https://via.placeholder.com/200x200?text=Product3"
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product3",
+        "type": [
+          "camiseta"
+        ]
       }
