@@ -7,6 +7,9 @@ app.disable('x-powered-by')
 const PORT = process.env.PORT ?? 5000
 
 
+// Middleware para analizar el cuerpo de la solicitud JSON
+app.use(express.json());
+
 app.get('/products', (req, res)=>{
     const { type } = req.query
     if(type){
@@ -20,7 +23,7 @@ app.get('/products', (req, res)=>{
 
 app.get('/products/:id', (req, res)=>{
     const {id} = req.params
-    const product = products.find(product => product.id = id) 
+    const product = products.find(product => product.id == id) 
     if(product) return res.json(product)
 
     res.status(404).json({message: "No se encontro el producto"})
@@ -43,9 +46,10 @@ app.post('/products', (req, res)=>{
         description,
         price, 
         imageUrl,
-        rate: rate?? 0,
         type
     }
+
+    console.log(newProduct)
 
     products.push(newProduct)
     res.status(201).json(newProduct)

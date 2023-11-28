@@ -12,10 +12,10 @@ POST http://localhost:5000/products
 Content-Type: application/json
 
 {
-        "id":,
+    
         "name": "Producto 3333",
         "description": "Descripción del Producto 3",
-        "price": 24.99,
+        "price": 0,
         "imageUrl": "https://via.placeholder.com/200x200?text=Product3",
         "type": [
           "camiseta"
