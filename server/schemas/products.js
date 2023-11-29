@@ -18,6 +18,11 @@ const validateProduct = (object)=>{
     return  productSchema.safeParse(object)
 }
 
+const validatePartialProduct = (input) =>{
+    return productSchema.partial().safeParse(input)
+}
+
 module.exports = {
-    validateProduct
+    validateProduct,
+    validatePartialProduct
 }

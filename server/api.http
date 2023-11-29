@@ -12,7 +12,7 @@ POST http://localhost:5000/products
 Content-Type: application/json
 
 {
-        "gys": "hola",
+        
         "name": "Producto 3333",
         "description": "Descripción del Producto 3",
         "price": 1,
@@ -21,3 +21,11 @@ Content-Type: application/json
           "camiseta"
         ]
       }
+
+###Actualizar una pelicula
+PATCH http://localhost:5000/products/3
+
+Content-Type: application/json
+{
+  "name": "taxi driver"
+}

@@ -1,7 +1,7 @@
 const express = require('express')
 const crypto = require('node:crypto')
 const products = require('./json/products.json');
-const { validateProduct } = require('./schemas/products');
+const { validateProduct, validatePartialProduct } = require('./schemas/products');
 
 const app = express();
 app.disable('x-powered-by')
@@ -44,10 +44,34 @@ app.post('/products', (req, res)=>{
         ...result.data
     }
 
-    console.log(newProduct)
+    // console.log(newProduct)
 
     products.push(newProduct)
     res.status(201).json(newProduct)
+})
+
+app.patch('/products/:id', (req,res)=>{
+    const result = validatePartialProduct(req.body);
+
+    if(!result.success){
+        return res.status(400).json({ error: JSON.parse(result.error.message)})
+    }
+
+    const {id} = req.params
+    const productIndex = products.findIndex(product => product.id == id)
+
+    if(productIndex == -1){
+        return res.status(404).json({message: 'producto no encontrado'})
+    }
+    
+    const updateProduct = {
+        ...products[productIndex],
+        ...result.data
+    }
+
+    products[productIndex] = updateProduct;
+
+    return res.json(updateProduct)
 })
 
 app.post('/newproducts', (req, res)=>{
