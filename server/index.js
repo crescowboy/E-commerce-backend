@@ -34,7 +34,7 @@ app.post('/products', (req, res)=>{
     const result = validateProduct(req.body) 
 
     if(result.error){
-        return res.status(400).json({message: result.error.message})
+        return res.status(400).json({message: JSON.parse(result.error.message)})
     }
 
     

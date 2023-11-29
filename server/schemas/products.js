@@ -1,4 +1,4 @@
-const z = require('node:zod')
+const z = require('zod')
 const { object } = require('zod')
 
 const productSchema = z.object({
