@@ -31,6 +31,56 @@
         "type": [
           "pantalon"
         ]
+      },
+      {
+        "id": 4,
+        "name": "Producto 4",
+        "description": "Descripción del Producto 4",
+        "price": 44.99,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product4",
+        "type": [
+          "pantalon"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Producto 5",
+        "description": "Descripción del Producto 5",
+        "price": 54.99,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product5",
+        "type": [
+          "pantalon"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Producto 6",
+        "description": "Descripción del Producto 6",
+        "price": 14.99,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product6",
+        "type": [
+          "pantalon"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Producto 7",
+        "description": "Descripción del Producto 7",
+        "price": 22.99,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product7",
+        "type": [
+          "pantalon"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Producto 8",
+        "description": "Descripción del Producto 8",
+        "price": 34.99,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product8",
+        "type": [
+          "pantalon"
+        ]
       }
       
     ]
