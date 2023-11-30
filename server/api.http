@@ -27,7 +27,7 @@ PATCH http://localhost:5000/products/2
 Content-Type: application/json
 
 {
-  "name": "Producto44559",
+  "name": "Producto4455933",
         "description": "Descripción del Producto 3",
         "price": 134,
         "imageUrl": "https://via.placeholder.com/200x200?text=Product3",
