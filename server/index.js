@@ -32,6 +32,7 @@ app.get('/products/:id', (req, res)=>{
 
 app.post('/products', (req, res)=>{
     const result = validateProduct(req.body) 
+    console.log(req.body)
 
     if(result.error){
         return res.status(400).json({message: JSON.parse(result.error.message)})
@@ -50,44 +51,50 @@ app.post('/products', (req, res)=>{
     res.status(201).json(newProduct)
 })
 
+
 app.patch('/products/:id', (req,res)=>{
     const result = validatePartialProduct(req.body);
+    // console.log(req.body)
 
     if(!result.success){
-        return res.status(400).json({ error: JSON.parse(result.error.message)})
+        console.log(result);
+        return res.status(400).json({error: JSON.parse(result.error.message)})
     }
 
     const {id} = req.params
+    // console.log(id)
     const productIndex = products.findIndex(product => product.id == id)
-
-    if(productIndex == -1){
+    // console.log(productIndex)
+    if(productIndex === -1){
         return res.status(404).json({message: 'producto no encontrado'})
-    }
-    
+    } 
+
     const updateProduct = {
         ...products[productIndex],
         ...result.data
     }
 
-    products[productIndex] = updateProduct;
+    // console.log('Producto actualizado:', result.data);
 
-    return res.json(updateProduct)
+    products[productIndex] = updateProduct
+
+    res.status(201).json(updateProduct)
 })
 
-app.post('/newproducts', (req, res)=>{
-    let body = '';
+// app.post('/newproducts', (req, res)=>{
+//     let body = '';
 
-    req.on('data', chunk =>{
-        body += chunk.toString() 
-    })
+//     req.on('data', chunk =>{
+//         body += chunk.toString() 
+//     })
 
-    req.on('end', ()=>{
-        const data = JSON.parse(body)
+//     req.on('end', ()=>{
+//         const data = JSON.parse(body)
 
-        data.timestamp = Date.now()
-        res.status(201).json(data)
-    })
-})
+//         data.timestamp = Date.now()
+//         res.status(201).json(data)
+//     })
+// })
 
 
 

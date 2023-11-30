@@ -23,9 +23,16 @@ Content-Type: application/json
       }
 
 ###Actualizar una pelicula
-PATCH http://localhost:5000/products/3
-
+PATCH http://localhost:5000/products/2
 Content-Type: application/json
+
 {
-  "name": "taxi driver"
+  "name": "Producto44559",
+        "description": "Descripción del Producto 3",
+        "price": 134,
+        "imageUrl": "https://via.placeholder.com/200x200?text=Product3",
+        "type": [
+          "camiseta"
+        ]
+       
 }
