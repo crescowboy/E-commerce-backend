@@ -1,5 +1,6 @@
 const express = require('express')
 const crypto = require('node:crypto')
+const cors = require('cors')
 const products = require('./json/products.json');
 const { validateProduct, validatePartialProduct } = require('./schemas/products');
 
@@ -7,7 +8,8 @@ const app = express();
 app.disable('x-powered-by')
 const PORT = process.env.PORT ?? 5000
 
-
+//Middleware cors
+app.use(cors())
 // Middleware para analizar el cuerpo de la solicitud JSON
 app.use(express.json());
 
@@ -30,6 +32,25 @@ app.get('/products', (req, res)=>{
     }
     res.json(products)
 });
+
+app.delete('/products/:id', (req,res)=>{
+    const origin = req.header('origin')
+    if(ACCEPTED_ORIGINS.includes(origin) || !origin){
+        res.header('Access-Control-Allow-Origin', origin)
+    }
+    
+    const {id} = req.params;
+    const productIndex = products.findIndex(product => product.id == id);
+
+    if(productIndex == -1){
+        return res.status(404).json({message: 'product not found'})
+    }
+
+    products.splice(productIndex, 1)
+
+    return res.json({message: 'Product deleted'})
+
+})
 
 app.get('/products/:id', (req, res)=>{
     const {id} = req.params
@@ -90,20 +111,15 @@ app.patch('/products/:id', (req,res)=>{
     res.status(201).json(updateProduct)
 })
 
-// app.post('/newproducts', (req, res)=>{
-//     let body = '';
+app.options('/products/:id', (req,res)=>{
+    const origin = req.header('origin')
 
-//     req.on('data', chunk =>{
-//         body += chunk.toString() 
-//     })
-
-//     req.on('end', ()=>{
-//         const data = JSON.parse(body)
-
-//         data.timestamp = Date.now()
-//         res.status(201).json(data)
-//     })
-// })
+    if(ACCEPTED_ORIGINS.includes(origin) || !origin){
+        res.header('Access-Control-Allow-Origin', origin)
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    }
+    res.sendStatus(200)
+})
 
 
 
